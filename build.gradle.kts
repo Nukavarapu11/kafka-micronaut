@@ -13,6 +13,7 @@ group = "com.micronaut.demo"
 val kotlinVersion=project.properties.get("kotlinVersion")
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 micronaut {
