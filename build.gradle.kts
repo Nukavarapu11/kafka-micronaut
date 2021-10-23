@@ -4,6 +4,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.0.0"
     id("io.micronaut.application") version "2.0.6"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.5.21"
+    id("io.gitlab.arturbosch.detekt") version "1.15.0-RC2"
 }
 
 version = "0.1"
@@ -20,6 +21,17 @@ micronaut {
     processing {
         incremental(true)
         annotations("com.micronaut.demo.*")
+    }
+}
+
+detekt {
+    failFast = true // fail build on any finding
+    buildUponDefaultConfig = true // preconfigure defaults
+    config = files("$projectDir/detekt.yml") // point to your custom config defining rules to run, overwriting default behavior
+    autoCorrect = true
+    reports {
+        html.enabled = true // observe findings in your browser with structure and code snippets
+        xml.enabled = true // checkstyle like format mainly for integrations like Jenkins
     }
 }
 
@@ -58,6 +70,4 @@ tasks {
             jvmTarget = "11"
         }
     }
-
-
 }
